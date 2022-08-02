@@ -9,10 +9,25 @@ export const GlobalStyle = createGlobalStyle `
 `
 
 export const AppContainer = styled.div `
+  display: flex;
+  justify-content: center;
+
   max-width: 100vw;
   min-height: 100vh;
 
-  /* font-family: ; */
+  font-family: 'Roboto', sans-serif;
 
   /* background-color: ; */
+`
+
+export const PageContainer = styled.div `
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 500px;
+  min-height: 100vh;
+
+  padding: 16px;
+
 `
