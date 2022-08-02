@@ -10,6 +10,10 @@ export const goToSignUpPage = (navigate) => {
   navigate("/cadastro")
 }
 
+export const goToSignUpAddressPage = (navigate) => {
+  navigate("/cadastro/endereco")
+}
+
 export const goToSearchPage = (navigate) => {
   navigate("/busca")
 }
