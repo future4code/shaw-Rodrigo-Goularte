@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
-import { BASE_URL } from "../constants/BASE_URL"
+import { BASE_URL } from "../constants/url"
 import GlobalContext from "./GlobalContext"
 
 const GlobalState = (props) => {
@@ -8,21 +8,18 @@ const GlobalState = (props) => {
   // const [restaurants, setRestaurants] = useState([])
   const [restaurants, setRestaurants] = useState([])
 
+  const header = { headers: { auth: window.localStorage.getItem("token") } }
 
-  const login = () => {
-    axios
-      .post(`${BASE_URL}/login`)
-  }
 
-  const getRestaurants = () => {
-    axios
-      .get(`${BASE_URL}/restaurants`)
-      .then(res => console.log(res.data))
+  const getRestaurants = async () => {
+    await axios
+      .get(`${BASE_URL}/restaurants`, header)
+      .then(res => setRestaurants(res.data.restaurants))
       .catch(error => console.log(error))
   }
 
   useEffect(() => {
-
+    getRestaurants()
   }, [])
 
   const states = {restaurants}
