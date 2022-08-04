@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
 import GlobalContext from "../../global/GlobalContext"
@@ -12,12 +12,39 @@ const SearchPage = () => {
   useProtectedPage()
   const navigate = useNavigate()
 
+  const { states } = useContext(GlobalContext)
+  const { restaurants } = states
+
   const [search, setSearch] = useState("")
+  const [isSearchEmpty, setIsSearchEmpty] = useState(true)
 
-  const {states} = useContext(GlobalContext)
-  const {restaurants} = states
+  const searchResult = search &&
+    restaurants
+      .filter((restaurant) => {
+        if (search !== "") {
+          return restaurant.name.toLowerCase().includes(search.toLowerCase())
+        }
+      })
+      .map((restaurant) => {
+        return (
+          <RestaurantCard
+            key={restaurant.id}
+            logoUrl={restaurant.logoUrl}
+            name={restaurant.name}
+            deliveryTime={restaurant.deliveryTime}
+            shipping={restaurant.shipping}
+            onClick={() => goToRestaurantPage(navigate, restaurant.id)}
+          />
+        )
+      })
 
-  console.log(search)
+  const checkSearch = () => {
+    search ? setIsSearchEmpty(false) : setIsSearchEmpty(true)
+  }
+
+  useEffect(() => {
+    checkSearch()
+  }, [search])
 
   return (
     <PageContainer>
@@ -31,28 +58,9 @@ const SearchPage = () => {
       />
 
       <RestaurantListContainer>
-        {
-          search ?
-          restaurants
-            .filter((restaurant) => {
-              if (search !== "") {
-                return restaurant.name.toLowerCase().includes(search.toLowerCase())
-              }
-            })
-            .map((restaurant) => {
-              return (
-                <RestaurantCard
-                  key={restaurant.id}
-                  logoUrl={restaurant.logoUrl}
-                  name={restaurant.name}
-                  deliveryTime={restaurant.deliveryTime}
-                  shipping={restaurant.shipping}
-                  onClick={() => goToRestaurantPage(navigate, restaurant.id)}
-                />
-              )
-            }) :
-          <p>{"Busque por nome de restaurante"}</p>
-        }
+        {searchResult.length > 0 && searchResult}
+        {(searchResult.length === 0 && isSearchEmpty === false) && <p>{"Não encontramos :("}</p>}
+        {isSearchEmpty && <p>{"Busque por nome de restaurante"}</p>}
       </RestaurantListContainer>
 
     </PageContainer>

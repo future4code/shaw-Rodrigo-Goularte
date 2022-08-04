@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 // import { useNavigate } from "react-router"
 import { useParams } from 'react-router-dom'
+import RestaurantDetailCard from "../../components/RestaurantDetailCard/RestaurantDetailCard"
 import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { PageContainer } from "../../styled/GlobalStyle"
@@ -25,16 +26,16 @@ const RestaurantPage = () => {
 
   return(
     <PageContainer>
-      <div>
-        <RestaurantImg url={restaurantDetails.logoUrl}/>
-        <div>
-          <h4>{restaurantDetails.name}</h4>
-          <p>{restaurantDetails.category}</p>
-          <p>{restaurantDetails.deliveryTime}</p>
-          <p>{restaurantDetails.shipping}</p>
-          <p>{restaurantDetails.address}</p>
-        </div>
-      </div>
+      <header>Restaurante</header>
+      
+      <RestaurantDetailCard
+          logoUrl={restaurantDetails.logoUrl}
+          name={restaurantDetails.name}
+          category={restaurantDetails.category}
+          deliveryTime={restaurantDetails.deliveryTime}
+          shipping={restaurantDetails.shipping}
+          address={restaurantDetails.address}
+      />
     </PageContainer>
   )
 }
