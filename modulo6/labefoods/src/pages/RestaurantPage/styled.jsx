@@ -1,14 +1,22 @@
 import styled from "styled-components"
 
-export const RestaurantImg = styled.div `
-  max-width: 100%;
-  height: 7.5rem;
+export const ProductsContainer = styled.div `
+  display: flex;
+  flex-direction: column;
 
-  border-radius: 8px 8px 0 0;
+  width: 100%;
 
-  background-image: url(${p => p.url});
-  background-size: cover;
-  background-position: center;
+  gap: 8px;
+`
 
-  object-fit: contain;
+export const CategoryName = styled.p `
+  margin-top: 8px;
+  letter-spacing: -0.39px;
+`
+
+export const Line = styled.div `
+  height: 1px;
+  width: 100%;
+
+  background-color: black;
 `

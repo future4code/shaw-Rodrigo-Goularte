@@ -1,16 +1,17 @@
 import React from "react"
+import { CardContainer, InfoContainer, ProductDescription, ProductImg, ProductName, ProductPrice } from "./styled"
 
-const ProductCard = () => {
+const ProductCard = (props) => {
 
-  return(
-    <div>
-      <img src="" alt="" />
-      <div>
-        <h4></h4>
-        <p></p>
-        <h4></h4>
-      </div>
-    </div>
+  return (
+    <CardContainer key={props.id}>
+      <ProductImg url={props.photoUrl}/>
+      <InfoContainer>
+        <ProductName>{props.name}</ProductName>
+        <ProductDescription>{props.description}</ProductDescription>
+        <ProductPrice>{`${props.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</ProductPrice>
+      </InfoContainer>
+    </CardContainer>
   )
 }
 

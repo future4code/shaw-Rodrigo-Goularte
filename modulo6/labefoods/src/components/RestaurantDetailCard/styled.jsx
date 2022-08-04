@@ -27,7 +27,12 @@ export const DescriptionContainer = styled.div `
   display: flex;
   flex-direction: column;
 
+  gap: 8px;
+
   padding-top: 12px;
+
+  letter-spacing: -0.39px;
+  color: #b8b8b8;
 `
 
 export const RestaurantName = styled.h4 `
@@ -44,15 +49,8 @@ export const RestaurantName = styled.h4 `
 
 export const CardBottom = styled.div `
   display: flex;
-  justify-content: space-between;
-
-  height: 18px;
-
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.39px;
-  color: #b8b8b8;
+  
+  p{
+    width: 104px;
+  }
 `
