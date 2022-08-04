@@ -5,7 +5,7 @@ const RestaurantCard = (props) => {
 
   return (
     <RestaurantCardContainer onClick={props.onClick}>
-      <RestaurantImg url={props.logoUrl} alt="" />
+      <RestaurantImg url={props.logoUrl}/>
       <DescriptionContainer>
         <RestaurantName>{props.name}</RestaurantName>
         <CardBottom>
