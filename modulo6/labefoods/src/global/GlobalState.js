@@ -8,6 +8,7 @@ const GlobalState = (props) => {
   const [restaurants, setRestaurants] = useState([])
   const [restaurantDetails, setRestaurantDetails] = useState([])
   const [products, setProducts] = useState([])
+  const [profile, setProfile] = useState({})
 
   const header = { headers: { auth: window.localStorage.getItem("token") } }
 
@@ -31,13 +32,23 @@ const GlobalState = (props) => {
       .catch(error => console.log(error))
   }
 
+  const getProfile = async (id) => {
+    await axios
+      .get(`${BASE_URL}/profile`, header)
+      .then(res => {
+        setProfile(res.data.user)
+      })
+      .catch(error => console.log(error))
+  }
+
   useEffect(() => {
     getRestaurants()
+    getProfile()
   }, [])
 
-  const states = {restaurants, restaurantDetails, products}
-  const setters = {setRestaurants, setRestaurantDetails, setProducts}
-  const requests = {getRestaurants, getRestaurantDetails}
+  const states = {restaurants, restaurantDetails, products, profile}
+  const setters = {setRestaurants, setRestaurantDetails, setProducts, setProfile}
+  const requests = {getRestaurants, getRestaurantDetails, getProfile}
 
   return(
     <GlobalContext.Provider value={{states, setters, requests}}>

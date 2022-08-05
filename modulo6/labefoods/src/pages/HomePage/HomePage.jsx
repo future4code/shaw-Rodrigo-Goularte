@@ -7,6 +7,7 @@ import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { goToRestaurantPage, goToSearchPage } from "../../routes/coordinator"
 import { PageContainer } from "../../styled/GlobalStyle"
 import { RestaurantListContainer, SearchInput } from "./styled"
+// import Navigation from "../../components/Navigation/Navigation"
 
 const HomePage = () => {
 
@@ -62,7 +63,8 @@ const HomePage = () => {
             })
         }
       </RestaurantListContainer>
-
+      
+      {/* <Navigation/> */}
     </PageContainer>
   )
 }
