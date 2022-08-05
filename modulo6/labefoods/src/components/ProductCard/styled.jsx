@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Button } from "@mui/material"
 
 export const CardContainer = styled.div`
   display: flex;
@@ -32,6 +33,48 @@ export const InfoContainer = styled.div`
   width: 100%;
 
   padding: 16px;
+`
+
+export const Side = styled.div`
+  position: relative;
+`
+
+export const Quantity = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: -1px;
+  right: -1px;
+
+  min-width: 33px;
+  height: 33px;
+
+  border-radius: 0 8px;
+  border: solid 1px #5cb646;
+
+  color: #5cb646;
+`
+
+export const Add = styled(Button)`
+  &&{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+
+    min-width: 90px;
+    height: 33px;
+
+    border-radius: 8px 0;
+    border: solid 1px #5cb646;
+
+    color: #5cb646;
+  }
 `
 
 export const ProductName = styled.h4`
