@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react"
 import GlobalContext from "../../global/GlobalContext"
 import SelectQuantityModal from "../SelectQuantityModal/SelectQuantityModal"
-import { Add, AddButton, AddToCartButton, CardContainer, InfoContainer, ProductDescription, ProductImg, ProductName, ProductPrice, Quantity, RemoveButton, Side } from "./styled"
+import { AddButton, CardContainer, InfoContainer, ProductDescription, ProductImg, ProductName, ProductPrice, Quantity, RemoveButton, Side } from "./styled"
 
 const ProductCard = (props) => {
 

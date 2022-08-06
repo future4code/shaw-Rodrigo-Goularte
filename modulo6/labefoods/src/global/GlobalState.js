@@ -64,10 +64,10 @@ const GlobalState = (props) => {
     }
   }
 
-  // useEffect(() => {
-  //   getRestaurants()
-  //   getProfile()
-  // }, [])
+  useEffect(() => {
+    getRestaurants()
+    getProfile()
+  }, [])
 
   const states = {restaurants, restaurantDetails, products, profile,cartProducts, order}
   const setters = {setRestaurants, setRestaurantDetails, setProducts, setProfile, setCartProducts, setOrder}

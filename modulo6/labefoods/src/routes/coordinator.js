@@ -37,3 +37,7 @@ export const goToEditAddressPage = (navigate) => {
 export const goToCartPage = (navigate) => {
   navigate("/carrinho")
 }
+
+export const goBack = (navigate) => {
+  navigate(-1)
+}

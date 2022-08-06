@@ -1,6 +1,7 @@
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { useContext } from "react"
 import Menu from "../../components/Menu/Menu"
+import ProductCard from "../../components/ProductCard/ProductCard"
 import GlobalContext from "../../global/GlobalContext"
 import { AddressInfo, AddressTitle, ButtonContainer, CartPageContainer, ConfirmButton, Line, OrderContainer, PaymentContainer, PriceContainer, Total, TotalContainer } from "./styled"
 
@@ -21,7 +22,22 @@ const CartPage = () => {
       </AddressInfo>
 
       <OrderContainer>
-
+        {
+          cartProducts.map((product) => {
+            return(
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                product={product}
+                quantity={product.quantity}
+                photoUrl={product.photoUrl}
+                name={product.name}
+                description={product.description}
+                price={product.price}
+              />
+            )
+          })
+        }
       </OrderContainer>
 
       <TotalContainer>

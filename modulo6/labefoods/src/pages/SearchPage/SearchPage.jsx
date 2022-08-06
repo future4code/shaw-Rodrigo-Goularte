@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Header from "../../components/Header/Header"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
 import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
@@ -48,7 +49,7 @@ const SearchPage = () => {
 
   return (
     <PageContainer>
-      <header>Busca</header>
+      <Header title="Busca" showArrow={true}/>
 
       <SearchInput
         type="text"

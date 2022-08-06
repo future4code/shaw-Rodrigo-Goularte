@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import Filter from "../../components/Filter/Filter"
+import Header from "../../components/Header/Header"
 import Menu from "../../components/Menu/Menu"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
 import GlobalContext from "../../global/GlobalContext"
@@ -27,14 +28,9 @@ const HomePage = () => {
     setCategory(newValue)
   }
 
-  useEffect(() => {
-    getRestaurants()
-  }, [])
-
   return(
     <PageContainer>
-      <header>FutureEats</header>
-
+      <Header title="FutureEats" showArrow={false}/>
       <SearchInput
         type="text"
         placeholder="Restaurante"

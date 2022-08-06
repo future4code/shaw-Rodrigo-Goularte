@@ -29,7 +29,7 @@ export const PageContainer = styled.div `
   max-width: 500px;
   min-height: 100vh;
 
-  padding: 16px;
+  padding: 48px 16px 16px 16px;
 
   gap: 8px;
 `
