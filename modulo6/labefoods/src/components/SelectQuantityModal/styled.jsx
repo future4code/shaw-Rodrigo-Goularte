@@ -34,7 +34,5 @@ export const ModalButton = styled(Button)`
   &&{
     font-size: 16px;
     padding-right: 0;
-
   }
-
 `

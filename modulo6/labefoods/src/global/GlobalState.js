@@ -9,6 +9,8 @@ const GlobalState = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([])
   const [products, setProducts] = useState([])
   const [profile, setProfile] = useState({})
+  const [cartProducts, setCartProducts] = useState([])
+  const [order, setOrder] = useState({})
 
   const header = { headers: { auth: window.localStorage.getItem("token") } }
 
@@ -32,11 +34,20 @@ const GlobalState = (props) => {
       .catch(error => console.log(error))
   }
 
-  const getProfile = async (id) => {
+  const getProfile = async () => {
     await axios
       .get(`${BASE_URL}/profile`, header)
       .then(res => {
         setProfile(res.data.user)
+      })
+      .catch(error => console.log(error))
+  }
+
+  const placeOrder = async (restaurantId) => {
+    await axios
+      .post(`${BASE_URL}/restaurants/${restaurantId}/order`)
+      .then(res => {
+        console.log(res.data)
       })
       .catch(error => console.log(error))
   }
@@ -46,9 +57,9 @@ const GlobalState = (props) => {
     getProfile()
   }, [])
 
-  const states = {restaurants, restaurantDetails, products, profile}
-  const setters = {setRestaurants, setRestaurantDetails, setProducts, setProfile}
-  const requests = {getRestaurants, getRestaurantDetails, getProfile}
+  const states = {restaurants, restaurantDetails, products, profile,cartProducts, order}
+  const setters = {setRestaurants, setRestaurantDetails, setProducts, setProfile, setCartProducts, setOrder}
+  const requests = {getRestaurants, getRestaurantDetails, getProfile, placeOrder}
 
   return(
     <GlobalContext.Provider value={{states, setters, requests}}>

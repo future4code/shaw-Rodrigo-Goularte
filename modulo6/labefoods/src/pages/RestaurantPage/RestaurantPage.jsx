@@ -32,6 +32,7 @@ const RestaurantPage = () => {
       <header>Restaurante</header>
 
       <RestaurantDetailCard
+        id={restaurantDetails.id}
         logoUrl={restaurantDetails.logoUrl}
         name={restaurantDetails.name}
         category={restaurantDetails.category}

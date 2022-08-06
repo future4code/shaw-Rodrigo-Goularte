@@ -57,7 +57,7 @@ export const Quantity = styled.div`
   color: #5cb646;
 `
 
-export const Add = styled(Button)`
+export const AddButton = styled(Button)`
   &&{
     display: flex;
     align-items: center;
@@ -73,7 +73,31 @@ export const Add = styled(Button)`
     border-radius: 8px 0;
     border: solid 1px #5cb646;
 
+    font-size: 12px;
+    text-transform: lowercase;
     color: #5cb646;
+  }
+`
+
+export const RemoveButton = styled(Button)`
+  &&{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+
+    min-width: 90px;
+    height: 33px;
+
+    border-radius: 8px 0;
+    border: solid 1px #e02020;
+
+    font-size: 12px;
+    text-transform: lowercase;
+    color: #e02020;
   }
 `
 
