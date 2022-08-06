@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import Filter from "../../components/Filter/Filter"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
@@ -16,8 +16,9 @@ const HomePage = () => {
 
   const [category, setCategory] = useState("Todos")
 
-  const {states} = useContext(GlobalContext)
+  const {states, requests} = useContext(GlobalContext)
   const {restaurants} = states
+  const {getRestaurants} = requests
 
   // console.log(restaurants)
   // console.log(category)
@@ -25,6 +26,10 @@ const HomePage = () => {
   const handleChangeCategory = (event, newValue) => {
     setCategory(newValue)
   }
+
+  useEffect(() => {
+    getRestaurants()
+  }, [])
 
   return(
     <PageContainer>

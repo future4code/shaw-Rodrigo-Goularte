@@ -6,11 +6,14 @@ import GlobalContext from "./GlobalContext"
 const GlobalState = (props) => {
 
   const [restaurants, setRestaurants] = useState([])
+  const [restaurantInfo, setRestaurantInfo] = useState([])
   const [restaurantDetails, setRestaurantDetails] = useState([])
   const [products, setProducts] = useState([])
   const [profile, setProfile] = useState({})
   const [cartProducts, setCartProducts] = useState([])
   const [order, setOrder] = useState({})
+
+  console.log(cartProducts)
 
   const header = { headers: { auth: window.localStorage.getItem("token") } }
 
@@ -52,14 +55,23 @@ const GlobalState = (props) => {
       .catch(error => console.log(error))
   }
 
-  useEffect(() => {
-    getRestaurants()
-    getProfile()
-  }, [])
+  const addToCart = (product, quantity, newRestaurant) => {
+    if(newRestaurant.id === restaurantInfo.id){
+      setCartProducts([...cartProducts, { ...product, quantity }])
+    } else {
+      setCartProducts([{ ...product, quantity }])
+      setRestaurantInfo(newRestaurant)
+    }
+  }
+
+  // useEffect(() => {
+  //   getRestaurants()
+  //   getProfile()
+  // }, [])
 
   const states = {restaurants, restaurantDetails, products, profile,cartProducts, order}
   const setters = {setRestaurants, setRestaurantDetails, setProducts, setProfile, setCartProducts, setOrder}
-  const requests = {getRestaurants, getRestaurantDetails, getProfile, placeOrder}
+  const requests = {getRestaurants, getRestaurantDetails, getProfile, placeOrder, addToCart}
 
   return(
     <GlobalContext.Provider value={{states, setters, requests}}>

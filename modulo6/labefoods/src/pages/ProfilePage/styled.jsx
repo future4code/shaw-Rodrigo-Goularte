@@ -10,7 +10,6 @@ export const ProfilePageContainer = styled.div`
   min-height: 100vh;
 
   padding-top: 16px;
-
 `
 
 export const PersonalInfo = styled.div`

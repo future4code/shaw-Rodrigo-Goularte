@@ -58,6 +58,8 @@ const RestaurantPage = () => {
                         <ProductCard
                           key={product.id}
                           id={product.id}
+                          product={product}
+                          // restaurantDetails={restaurantDetails}
                           photoUrl={product.photoUrl}
                           name={product.name}
                           description={product.description}
