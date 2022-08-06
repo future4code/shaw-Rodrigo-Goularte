@@ -6,6 +6,7 @@ import { AddressContainer, AddressInfo, AddressTitle, EditIcon, Line, OrderHisto
 import edit from "../../assets/edit.svg"
 import OrderCard from "../../components/OrderCard/OrderCard"
 import { goToEditAddressPage, goToEditProfilePage } from "../../routes/coordinator"
+import Menu from "../../components/Menu/Menu"
 
 const ProfilePage = () => {
 
@@ -46,6 +47,8 @@ const ProfilePage = () => {
           <OrderCard/>
         </div>
       </OrderHistoryContainer>
+
+      <Menu page={"profile"}/>
     </ProfilePageContainer>
   )
 }

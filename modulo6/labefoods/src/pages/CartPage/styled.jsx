@@ -11,6 +11,7 @@ export const CartPageContainer = styled.div`
   min-height: 100vh;
 
   padding-top: 16px;
+  padding-bottom: 50px;
 `
 
 export const AddressInfo = styled.div`
@@ -27,6 +28,17 @@ export const AddressInfo = styled.div`
 
 export const AddressTitle = styled.p`
   color: #b8b8b8;
+`
+
+export const OrderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  padding: 16px;
+  gap: 8px;
+
+  width: 100%;
 `
 
 export const TotalContainer = styled.div`
@@ -71,7 +83,7 @@ export const PaymentContainer = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   padding: 16px;

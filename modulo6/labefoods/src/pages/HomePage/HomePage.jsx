@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import Filter from "../../components/Filter/Filter"
+import Menu from "../../components/Menu/Menu"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
 import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { goToRestaurantPage, goToSearchPage } from "../../routes/coordinator"
 import { PageContainer } from "../../styled/GlobalStyle"
 import { RestaurantListContainer, SearchInput } from "./styled"
-// import Navigation from "../../components/Navigation/Navigation"
 
 const HomePage = () => {
 
@@ -69,7 +69,7 @@ const HomePage = () => {
         }
       </RestaurantListContainer>
       
-      {/* <Navigation/> */}
+      <Menu page={"home"}/>
     </PageContainer>
   )
 }

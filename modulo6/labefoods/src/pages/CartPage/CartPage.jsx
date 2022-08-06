@@ -1,8 +1,8 @@
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { useContext } from "react"
+import Menu from "../../components/Menu/Menu"
 import GlobalContext from "../../global/GlobalContext"
-// import Navigation from "../../components/Navigation/Navigation"
-import { AddressInfo, AddressTitle, ButtonContainer, CartPageContainer, ConfirmButton, Line, PaymentContainer, PriceContainer, Total, TotalContainer } from "./styled"
+import { AddressInfo, AddressTitle, ButtonContainer, CartPageContainer, ConfirmButton, Line, OrderContainer, PaymentContainer, PriceContainer, Total, TotalContainer } from "./styled"
 
 const CartPage = () => {
 
@@ -19,6 +19,10 @@ const CartPage = () => {
         <AddressTitle>Endereço de entrega</AddressTitle>
         <p>{profile.address}</p>
       </AddressInfo>
+
+      <OrderContainer>
+
+      </OrderContainer>
 
       <TotalContainer>
         <p>SUBTOTAL</p>
@@ -54,7 +58,7 @@ const CartPage = () => {
         <ConfirmButton disabled={true}>Confirmar</ConfirmButton>
       </ButtonContainer>
 
-      {/* <Navigation/> */}
+      <Menu page={"cart"}/>
     </CartPageContainer>
   )
 }
