@@ -5,6 +5,7 @@ import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { AddressContainer, AddressInfo, AddressTitle, EditIcon, Line, OrderHistoryContainer, PersonalInfo, ProfilePageContainer } from "./styled"
 import edit from "../../assets/edit.svg"
 import OrderCard from "../../components/OrderCard/OrderCard"
+import { goToEditAddressPage, goToEditProfilePage } from "../../routes/coordinator"
 
 const ProfilePage = () => {
 
@@ -27,7 +28,7 @@ const ProfilePage = () => {
           <p>{profile.email}</p>
           <p>{profile.cpf}</p>
         </div>
-        <EditIcon src={edit} alt="edit-icon" />
+        <EditIcon src={edit} onClick={() => goToEditProfilePage(navigate)} alt="edit-icon" />
       </PersonalInfo>
 
       <AddressContainer>
@@ -35,7 +36,7 @@ const ProfilePage = () => {
           <AddressTitle>Endereço cadastrado</AddressTitle>
           <p>{profile.address}</p>
         </AddressInfo>
-        <EditIcon src={edit} alt="edit-icon" />
+        <EditIcon src={edit} onClick={() => goToEditAddressPage(navigate)} alt="edit-icon" />
       </AddressContainer>
 
       <OrderHistoryContainer>

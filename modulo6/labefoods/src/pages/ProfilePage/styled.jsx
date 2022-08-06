@@ -8,6 +8,9 @@ export const ProfilePageContainer = styled.div`
   width: 100%;
   max-width: 500px;
   min-height: 100vh;
+
+  padding-top: 16px;
+
 `
 
 export const PersonalInfo = styled.div`

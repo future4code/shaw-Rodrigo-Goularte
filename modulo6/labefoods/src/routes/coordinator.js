@@ -26,6 +26,14 @@ export const goToProfilePage = (navigate) => {
   navigate("/perfil")
 }
 
+export const goToEditProfilePage = (navigate) => {
+  navigate("/perfil/editar-perfil")
+}
+
+export const goToEditAddressPage = (navigate) => {
+  navigate("/perfil/editar-endereco")
+}
+
 export const goToCartPage = (navigate) => {
   navigate("/carrinho")
 }
