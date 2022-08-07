@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material"
 import React from "react"
+import Header from "../../components/Header/Header"
 import { PageContainer } from "../../styled/GlobalStyle"
 import { AddressForm, LoginButton } from "./styled"
 
@@ -7,7 +8,7 @@ const EditAddressPage = () => {
 
   return (
     <PageContainer>
-      <header>Endereço</header>
+      <Header title="Endereço" showArrow={true}/>
 
       <AddressForm>
 

@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material"
 import React from "react"
+import Header from "../../components/Header/Header"
 import { PageContainer } from "../../styled/GlobalStyle"
 import { LoginButton, ProfileForm } from "./styled"
 
@@ -7,7 +8,7 @@ const EditProfilePage = () => {
 
   return (
     <PageContainer>
-      <header>Editar</header>
+      <Header title="Editar" showArrow={true}/>
 
       <ProfileForm>
 

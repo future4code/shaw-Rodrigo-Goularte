@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
+import Header from "../../components/Header/Header"
 import ProductCard from "../../components/ProductCard/ProductCard"
 import RestaurantDetailCard from "../../components/RestaurantDetailCard/RestaurantDetailCard"
 import GlobalContext from "../../global/GlobalContext"
@@ -29,7 +30,7 @@ const RestaurantPage = () => {
 
   return (
     <PageContainer>
-      <header>Restaurante</header>
+      <Header title="Restaurante" showArrow={true}/>
 
       <RestaurantDetailCard
         id={restaurantDetails.id}

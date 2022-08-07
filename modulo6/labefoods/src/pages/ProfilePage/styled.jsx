@@ -9,7 +9,7 @@ export const ProfilePageContainer = styled.div`
   max-width: 500px;
   min-height: 100vh;
 
-  padding-top: 16px;
+  padding-top: 40px;
 `
 
 export const PersonalInfo = styled.div`
@@ -20,6 +20,15 @@ export const PersonalInfo = styled.div`
   width: 100%;
 
   padding: 16px;
+`
+
+export const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  gap: 8px;
 `
 
 export const EditIcon = styled.img`

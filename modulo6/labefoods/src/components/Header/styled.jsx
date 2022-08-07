@@ -20,7 +20,7 @@ export const GoBackArrow = styled(ArrowBackIosNew) `
     position: absolute;
     left: 10px;
 
-    /* width: 16px; */
+    width: 20px;
   }
 `
 

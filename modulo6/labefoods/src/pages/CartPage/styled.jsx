@@ -10,7 +10,7 @@ export const CartPageContainer = styled.div`
   max-width: 500px;
   min-height: 100vh;
 
-  padding-top: 16px;
+  padding-top: 40px;
   padding-bottom: 50px;
 `
 

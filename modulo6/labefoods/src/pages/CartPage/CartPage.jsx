@@ -1,5 +1,6 @@
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { useContext } from "react"
+import Header from "../../components/Header/Header"
 import Menu from "../../components/Menu/Menu"
 import ProductCard from "../../components/ProductCard/ProductCard"
 import GlobalContext from "../../global/GlobalContext"
@@ -14,7 +15,7 @@ const CartPage = () => {
 
   return (
     <CartPageContainer>
-      <header>Meu carrinho</header>
+      <Header title="Meu carrinho" showArrow={false}/>
 
       <AddressInfo>
         <AddressTitle>Endereço de entrega</AddressTitle>
