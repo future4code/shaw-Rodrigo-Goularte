@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components"
+import { Button } from "@mui/material"
 
 export const GlobalStyle = createGlobalStyle `
   * {
@@ -32,4 +33,15 @@ export const PageContainer = styled.div `
   padding: 48px 16px 16px 16px;
 
   gap: 8px;
+`
+
+export const FormButton = styled(Button) `
+  && {
+    background-color: #5cb646;
+    color: black;
+
+    :hover{
+      background-color: #5cb646;
+    }
+  }
 `

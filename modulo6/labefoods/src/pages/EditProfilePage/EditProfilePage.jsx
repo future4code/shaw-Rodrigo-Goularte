@@ -1,26 +1,83 @@
-import { TextField } from "@mui/material"
-import React from "react"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
 import Header from "../../components/Header/Header"
-import { PageContainer } from "../../styled/GlobalStyle"
-import { LoginButton, ProfileForm } from "./styled"
+import { TextField } from "@mui/material"
+import { BASE_URL } from "../../constants/url"
+import { FormButton, PageContainer } from "../../styled/GlobalStyle"
+import { ProfileForm } from "./styled"
+import { useProtectedPage } from "../../hooks/useProtectedPage"
+import { goToProfilePage } from "../../routes/coordinator"
+import { useNavigate } from "react-router-dom"
 
 const EditProfilePage = () => {
 
+  useProtectedPage()
+  const navigate = useNavigate()
+  
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [cpf, setCpf] = useState("")
+
+  const header = { headers: { auth: window.localStorage.getItem("token") } }
+
+  const getProfile = async () => {
+    await axios
+      .get(`${BASE_URL}/profile`, header)
+      .then(res => {
+        setName(res.data.user.name)
+        setEmail(res.data.user.email)
+        setCpf(res.data.user.cpf)
+      })
+      .catch(error => console.log(error.response))
+  }
+
+  // REGEX de cpf
+  const cpfMask = (value) => {
+    if(cpf){
+      return value
+        .replace(/\D/g, "")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+        .replace(/(-\d{2})\d+?$/, "$1")
+    }
+  }
+  
+  const updateProfile = async () => {
+    const body = {name, email, cpf}
+    await axios
+      .put(`${BASE_URL}/profile`, body, header)
+      .then(res => {
+        console.log(res.data.user)
+      })
+      .catch(error => console.log(error.message))
+  }
+
+  const onSubmitForm = (event) => {
+    event.preventDefault()
+    updateProfile()
+    goToProfilePage(navigate)
+  }
+
+  useEffect(() => {
+    getProfile()
+  }, [])
+
   return (
     <PageContainer>
-      <Header title="Editar" showArrow={true}/>
+      <Header title="Editar" showArrow={true} />
 
-      <ProfileForm>
+      <ProfileForm onSubmit={onSubmitForm}>
 
         <TextField
           id="outlined-basic"
           label="Nome"
+          name="name"
           type={"text"}
-          // placeholder="email@email.com"
           variant="outlined"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           color="secondary"
-          // value={email}
-          // onChange={(event) => setEmail(event.target.value)}
           focused
           required
         />
@@ -28,14 +85,12 @@ const EditProfilePage = () => {
         <TextField
           id="outlined-basic"
           label="E-mail"
+          name="email"
           type={"email"}
-          // placeholder={"Mínimo 6 caracteres"}
           variant="outlined"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           color="secondary"
-          // type={showPassword ? "text" : "password"}
-          // value={password}
-          // onChange={(event) => setPassword(event.target.value)}
-          inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres." }}
           focused
           required
         />
@@ -43,19 +98,17 @@ const EditProfilePage = () => {
         <TextField
           id="outlined-basic"
           label="CPF"
+          name="cpf"
           type={"text"}
-          // placeholder={"Mínimo 6 caracteres"}
           variant="outlined"
+          value={cpfMask(cpf)}
+          onChange={(e) => setCpf(e.target.value)}
           color="secondary"
-          // type={showPassword ? "text" : "password"}
-          // value={password}
-          // onChange={(event) => setPassword(event.target.value)}
-          inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres." }}
           focused
           required
         />
 
-        <LoginButton type="submit">Salvar</LoginButton>
+        <FormButton type="submit">Salvar</FormButton>
 
       </ProfileForm>
     </PageContainer>

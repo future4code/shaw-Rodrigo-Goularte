@@ -1,21 +1,18 @@
 import axios from "axios"
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { goToHomePage, goToSignUpPage } from "../../routes/coordinator"
+import { goToHomePage, goToSignUpAddressPage, goToSignUpPage } from "../../routes/coordinator"
 import TextField from '@mui/material/TextField'
-import { LoginButton, LoginForm, Logo, TopText } from "./styled"
-import { PageContainer } from "../../styled/GlobalStyle"
+import { LoginForm, Logo, PasswordContainer, PasswordInput, TopText } from "./styled"
+import { FormButton, PageContainer } from "../../styled/GlobalStyle"
 import { BASE_URL } from "../../constants/url"
 import logo from "../../images/logo-future-eats.png"
-// import { InputLabel} from "@mui/material"
-// import { useForm } from "../../hooks/useForm"
-// import { Visibility, VisibilityOff } from "@mui/icons-material"
+import { Visibility, VisibilityOff } from "@mui/icons-material"
+import { IconButton } from "@mui/material"
 
 const LoginPage = () => {
 
   const navigate = useNavigate()
-
-  // const [form, onChange] = useForm({email: "", password: ""})
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -23,13 +20,13 @@ const LoginPage = () => {
   const [passwordError, setPasswordError] = useState("")
   const [checkEmailError, setCheckEmailError] = useState(false)
   const [checkpasswordError, setCheckPasswordError] = useState(false)
-  // const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const login = (body) => {
     axios
       .post(`${BASE_URL}/login`, body)
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setEmail("")
         setEmailError("")
         setCheckEmailError(false)
@@ -38,7 +35,12 @@ const LoginPage = () => {
         setCheckPasswordError(false)
 
         localStorage.setItem("token", res.data.token)
-        goToHomePage(navigate)
+
+        if(res.data.user.hasAddress === true) {
+          goToHomePage(navigate)
+        } else {
+          goToSignUpAddressPage(navigate)
+        }
       })
       .catch((error) => {
         if(error.response.data.message.includes("Senha incorreta")) {
@@ -52,19 +54,17 @@ const LoginPage = () => {
       })
   }
 
-  // const handleClickShowPassword = () => {
-  //   setShowPassword(!showPassword)
-  // }
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
 
-  const handleClick = (event) => {
+  const onSubmitForm = (event) => {
     event.preventDefault()
     // console.log("BODY:", form)
 
     const userLogin = {email, password}
 
     login(userLogin)
-
-    console.log({email, password})
   }
 
   return(
@@ -74,69 +74,53 @@ const LoginPage = () => {
       
       <TopText>Entrar</TopText>
 
-      <LoginForm onSubmit={handleClick}>
+      <LoginForm onSubmit={onSubmitForm}>
 
         <TextField
-          error={checkEmailError}
-          helperText={checkEmailError? emailError : ""}
           id="outlined-basic"
           label="E-mail"
+          name="email"
           type={"email"}
           placeholder="email@email.com"
           variant="outlined"
-          color="secondary"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          focused
-          required
-        />
-
-        <TextField
-          error={checkpasswordError}
-          helperText={checkpasswordError? passwordError : ""}
-          id="outlined-basic"
-          variant="outlined"
           color="secondary"
-          type={"password"}
-          // type={showPassword ? "text" : "password"}
-          placeholder={"Mínimo 6 caracteres"}
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          inputProps={{minLength: 6, title:"A senha deve conter no mínimo 6 caracteres."}}
-          // endAdornment={
-          //   <InputAdornment position="end">
-          //     <IconButton
-          //       aria-label="toggle password visibility"
-          //       onClick={handleClickShowPassword}
-          //       edge="end"
-          //     >
-          //       {showPassword ? <VisibilityOff /> : <Visibility />}
-          //     </IconButton>
-          //   </InputAdornment>
-          // }
-          label="Senha"
+          error={checkEmailError}
+          helperText={checkEmailError? emailError : ""}
           focused
           required
         />
+
+        <PasswordContainer>
+          <PasswordInput
+            id="outlined-basic"
+            label="Senha"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder={"Mínimo 6 caracteres"}
+            variant="outlined"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            
+            error={checkpasswordError}
+            helperText={checkpasswordError? passwordError : ""}
+            color="secondary"
+            inputProps={{minLength: 6, title:"A senha deve conter no mínimo 6 caracteres."}}
+            focused
+            required
+          />
+          <IconButton
+            aria-label="toggle password visibility"
+            onClick={handleClickShowPassword}
+            edge="end"
+          >
+            {showPassword ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
+        </PasswordContainer>
+
         
-        <LoginButton type="submit">Entrar</LoginButton>
-
-
-        {/* <input
-          name="email"
-          value={form.email}
-          onChange={onChange}
-          placeholder="E-mail"
-          type="email"
-        />
-        <input
-          name="password"
-          value={form.password}
-          onChange={onChange}
-          placeholder="Senha"
-          type="password"
-        /> */}
-
+        <FormButton type="submit">Entrar</FormButton>
       </LoginForm>
 
       <span>Não possui cadastro? clique <button onClick={() => goToSignUpPage(navigate)}>aqui</button></span>

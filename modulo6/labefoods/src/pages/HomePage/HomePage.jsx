@@ -28,6 +28,10 @@ const HomePage = () => {
     setCategory(newValue)
   }
 
+  useEffect(() => {
+    getRestaurants()
+  }, [])
+
   return(
     <PageContainer>
       <Header title="FutureEats" showArrow={false}/>

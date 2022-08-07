@@ -1,10 +1,5 @@
 import styled from "styled-components"
-import { Button } from "@mui/material"
-
-// export const LogoContainer = styled.div `
-//   display: flex;
-//   justify-content: center;
-// `
+import TextField from '@mui/material/TextField'
 
 export const Logo = styled.img `
   width: 104px;
@@ -26,9 +21,15 @@ export const LoginForm = styled.form `
   gap: 16px;
 `
 
-export const LoginButton = styled(Button) `
-  && {
-    background-color: #5cb646;
-    color: black;
-  }
+export const PasswordContainer = styled.div `
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+`
+
+export const PasswordInput = styled(TextField) `
+  &&{
+    width: 100%;
+    }
 `

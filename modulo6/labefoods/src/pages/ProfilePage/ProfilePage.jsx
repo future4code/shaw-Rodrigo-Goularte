@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
@@ -14,10 +14,15 @@ const ProfilePage = () => {
   useProtectedPage()
   const navigate = useNavigate()
 
-  const {states} = useContext(GlobalContext)
+  const {states, requests} = useContext(GlobalContext)
   const {profile} = states
+  const {getProfile} = requests
 
-  console.log(profile)
+  // console.log(profile)
+
+  useEffect(() => {
+    getProfile()
+  }, [])
 
 
   return(
