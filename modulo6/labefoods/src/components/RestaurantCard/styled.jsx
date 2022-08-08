@@ -40,7 +40,7 @@ export const RestaurantName = styled.h4 `
   font-style: normal;
   line-height: normal;
   letter-spacing: -0.39px;
-  color: #5cb646
+  color: #5cb646;
 `
 
 export const CardBottom = styled.div `

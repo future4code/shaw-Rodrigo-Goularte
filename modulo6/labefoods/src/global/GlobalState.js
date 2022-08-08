@@ -11,55 +11,50 @@ const GlobalState = (props) => {
   const [products, setProducts] = useState([])
   const [profile, setProfile] = useState({})
   const [cartProducts, setCartProducts] = useState([])
-  const [order, setOrder] = useState({})
+  const [orderInfo, setOrderInfo] = useState([])
 
   // console.log(cartProducts)
+  // console.log(restaurantInfo)
 
   const header = { headers: { auth: window.localStorage.getItem("token") } }
+  // console.log(header.headers.auth)
 
 
   const getRestaurants = async () => {
     await axios
       .get(`${BASE_URL}/restaurants`, header)
-      .then(res => {
+      .then((res) => {
         setRestaurants(res.data.restaurants)
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error.response))
   }
 
   const getRestaurantDetails = async (id) => {
     await axios
       .get(`${BASE_URL}/restaurants/${id}`, header)
-      .then(res => {
+      .then((res) => {
         setRestaurantDetails(res.data.restaurant)
         setProducts(res.data.restaurant.products)
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error.response))
   }
 
   const getProfile = async () => {
     await axios
       .get(`${BASE_URL}/profile`, header)
-      .then(res => {
+      .then((res) => {
         setProfile(res.data.user)
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error.response))
   }
 
-  const placeOrder = async (restaurantId) => {
-    await axios
-      .post(`${BASE_URL}/restaurants/${restaurantId}/order`)
-      .then(res => {
-        console.log(res.data)
-      })
-      .catch(error => console.log(error))
-  }
-
-  const addToCart = (product, quantity, newRestaurant) => {
+  const addToCart = (product, quantity, newRestaurant, newPrice) => {
     if(newRestaurant.id === restaurantInfo.id){
-      setCartProducts([...cartProducts, { ...product, quantity }])
+      setCartProducts([...cartProducts, { ...product, quantity, price: newPrice }])
+      setOrderInfo([...orderInfo, {id: product.id, quantity}])
     } else {
-      setCartProducts([{ ...product, quantity }])
+      setCartProducts([{ ...product, quantity, price: newPrice }])
+      setOrderInfo([{id: product.id, quantity}])
       setRestaurantInfo(newRestaurant)
     }
   }
@@ -69,9 +64,9 @@ const GlobalState = (props) => {
     getProfile()
   }, [])
 
-  const states = {restaurants, restaurantDetails, products, profile,cartProducts, order}
-  const setters = {setRestaurants, setRestaurantDetails, setProducts, setProfile, setCartProducts, setOrder}
-  const requests = {getRestaurants, getRestaurantDetails, getProfile, placeOrder, addToCart}
+  const states = {restaurants, restaurantInfo, restaurantDetails, products, profile,cartProducts, orderInfo}
+  const setters = {setRestaurants, setRestaurantDetails, setProducts, setProfile, setCartProducts, setOrderInfo}
+  const requests = {getRestaurants, getRestaurantDetails, getProfile, addToCart}
 
   return(
     <GlobalContext.Provider value={{states, setters, requests}}>

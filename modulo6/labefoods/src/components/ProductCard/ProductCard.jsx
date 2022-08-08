@@ -7,7 +7,6 @@ const ProductCard = (props) => {
 
   const [showModal, setShowModal] = useState(false)
   const [quantity, setQuantity] = useState(0)
-  const [showQuantity, setShowQuantity] = useState(false)
 
   const { states, setters, requests } = useContext(GlobalContext)
   const { cartProducts, restaurantDetails } = states
@@ -15,33 +14,33 @@ const ProductCard = (props) => {
   const { addToCart } = requests
 
   // console.log(quantity)
-  // console.log(restaurantDetails.id)
+  // console.log(cartProducts)
+  // console.log(newPrice)
 
   const onChangeQuantity = (event) => {
-    setQuantity(event.target.value)
+    setQuantity(Number(event.target.value))
   }
 
   const onClickAddToCart = () => {
     if (quantity === 0) {
-      setQuantity("1")
-      addToCart(props.product, "1", restaurantDetails)
-      // setCartProducts([...cartProducts, { id: props.id, quantity: "1" }])
-      setShowQuantity(true)
+      setQuantity(1)
+      addToCart(props.product, 1, restaurantDetails, props.price)
       setShowModal(false)
     } else {
-      addToCart(props.product, quantity, restaurantDetails)
-      // setCartProducts([...cartProducts, { id: props.id, quantity }])
-      setShowQuantity(true)
+      addToCart(props.product, quantity, restaurantDetails, quantity * props.price)
       setShowModal(false)
     }
   }
+
+  const findProductInCart = cartProducts.find((product) => {
+    return product.id === props.product.id
+  })
 
   const onClickRemoveFromCart = () => {
     const newCartProducts = cartProducts.filter((product) => {
       return product.id !== props.id
     })
     setCartProducts(newCartProducts)
-    setShowQuantity(false)
     setQuantity(0)
   }
 
@@ -54,8 +53,8 @@ const ProductCard = (props) => {
         <ProductPrice>{`${props.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</ProductPrice>
       </InfoContainer>
       <Side>
-        {showQuantity && <Quantity>{quantity}</Quantity>}
-        {showQuantity ?
+        {findProductInCart && <Quantity>{findProductInCart.quantity}</Quantity>}
+        {findProductInCart ?
           <RemoveButton
             onClick={onClickRemoveFromCart}
           >

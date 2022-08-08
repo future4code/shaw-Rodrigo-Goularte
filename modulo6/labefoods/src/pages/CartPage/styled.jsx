@@ -30,6 +30,43 @@ export const AddressTitle = styled.p`
   color: #b8b8b8;
 `
 
+//--------------------------------------------------------------------------------------------
+export const RestaurantInfoContainer = styled.div `
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+
+  gap: 8px;
+  padding: 16px 16px 0 16px;
+
+  border-radius: 8px;
+`
+
+export const DescriptionContainer = styled.div `
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  letter-spacing: -0.39px;
+  color: #b8b8b8;
+`
+
+export const RestaurantName = styled.h4 `
+  height: 18px;
+
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: #5cb646;
+`
+//--------------------------------------------------------------------------------------------
+
 export const OrderContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -94,5 +131,9 @@ export const ConfirmButton = styled(Button) `
     width: 100%;
     background-color: ${(p) => p.disabled ? "rgba(92, 182, 70, 0.5)" : "#5cb646"};
     color: black;
+
+    :hover{
+      background-color: ${(p) => p.disabled ? "rgba(92, 182, 70, 0.5)" : "#5cb646"};
+    }
   }
 `
