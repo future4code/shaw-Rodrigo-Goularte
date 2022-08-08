@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+<h1 align="center">
+     LabeFoods
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h4 align="left">
+    Projeto da Labenu que se aproxima do mundo real. É uma plataforma de delivery com diversos tipos de restaurantes e comidas.
+</h4>
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+##  🕵 Sobre
 
-### `npm start`
+O objetivo é...
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+##  🧑‍💻 Autor
 
-### `npm test`
+- [Rodrigo Goularte](https://github.com/rodrigoularte)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
+##  🔠 Conteúdos
 
-### `npm run build`
+<!--ts-->
+   * [Sobre](#sobre)
+   * [Autor](#autor)
+   * [Status](#status)
+   * [Objetivo do Projeto](#objetivo-do-projeto)
+   * [Requisitos de Funcionalidade](#requisitos-de-funcionalidade)
+   * [Concepção do Projeto](#concepcao-do-projeto)
+   * [Link para Acessar](#link-para-acessar)
+   * [Rodando o Projeto](#rodando-o-projeto)
+<!--te-->
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
+##  🧭 Status do Projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ⌛ Fazendo
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+##  🎯Objetivo do Projeto
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Este é um projeto de Front-end , desenvolvido na etapa final do módulo de front-end, no bootcamp da Labenu, cujo o principal objetivo é estudar e praticar: Javascript; React; Aplicações com múltiplas rotas utilizando React Router; Autenticação; Uso de Material UI e Styled-components; GlobalState; Formulários com Validação; Hooks useState, useEffect e useForm; Layout mobile.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## ☑️Requisitos de Funcionalidade
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [x] Fluxo de Login/Cadastro
+- [x] Busca e Seleção de Restaurantes
+- [x] Cardápio do Restaurante
+- [ ] Carrinho e Finalizar Compra
+- [x] Perfil, Editar Perfil e Histórico de Pedidos
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 💡Concepção do Projeto
 
-### Analyzing the Bundle Size
+- Recebi um layout pronto e que foi feito pela designer Camila Mizutani
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🔗Link para Acessar
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Link do Surge:** https://labefoods-rodrigoularte.surge.sh/
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## 🛰Rodando o Projeto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Para Rodar o projeto, siga as seguintes etapas no seu terminal :
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- git clone
+- dentro da pasta do projeto: npm install
+- npm run start
