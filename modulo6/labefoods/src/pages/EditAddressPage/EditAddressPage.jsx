@@ -1,26 +1,80 @@
 import { TextField } from "@mui/material"
-import React from "react"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Header from "../../components/Header/Header"
-import { PageContainer } from "../../styled/GlobalStyle"
-import { AddressForm, LoginButton } from "./styled"
+import { BASE_URL } from "../../constants/url"
+import { useProtectedPage } from "../../hooks/useProtectedPage"
+import { goToProfilePage } from "../../routes/coordinator"
+import { FormButton, PageContainer } from "../../styled/GlobalStyle"
+import { AddressForm } from "./styled"
 
 const EditAddressPage = () => {
+
+  useProtectedPage()
+  const navigate = useNavigate()
+
+  const [street, setStreet] = useState("")
+  const [number, setNumber] = useState("")
+  const [neighbourhood, setNeighbourhood] = useState("")
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("")
+  const [complement, setComplement] = useState("")
+
+  const header = { headers: { auth: window.localStorage.getItem("token") } }
+
+  const getFullAddress = async () => {
+    await axios
+      .get(`${BASE_URL}/profile/address`, header)
+      .then(res => {
+        console.log(res.data.address)
+        setStreet(res.data.address.street)
+        setNumber(res.data.address.number)
+        setNeighbourhood(res.data.address.neighbourhood)
+        setCity(res.data.address.city)
+        setState(res.data.address.state)
+        setComplement(res.data.address.complement)
+      })
+      .catch(error => console.log(error.response))
+  }
+
+  const addAddress = async () => {
+    const body = {street, number, neighbourhood, city, state, complement}
+    await axios
+      .put(`${BASE_URL}/address`, body, header)
+      .then(res => {
+        // console.log(res.data)
+        localStorage.setItem("token", res.data.token)
+        goToProfilePage(navigate)
+      })
+      .catch(error => console.log(error.message))
+  }
+
+  const onSubmitForm = (event) => {
+    event.preventDefault()
+    addAddress()
+  }
+
+
+  useEffect(() => {
+    getFullAddress()
+  }, [])
 
   return (
     <PageContainer>
       <Header title="Endereço" showArrow={true}/>
 
-      <AddressForm>
+      <AddressForm onSubmit={onSubmitForm}>
 
         <TextField
           id="outlined-basic"
           label="Logradouro"
+          name="street"
           type={"text"}
-          // placeholder="email@email.com"
           variant="outlined"
+          value={street}
+          onChange={(event) => setStreet(event.target.value)}
           color="secondary"
-          // value={email}
-          // onChange={(event) => setEmail(event.target.value)}
           focused
           required
         />
@@ -28,14 +82,12 @@ const EditAddressPage = () => {
         <TextField
           id="outlined-basic"
           label="Número"
+          name="number"
           type={"number"}
-          // placeholder={"Mínimo 6 caracteres"}
           variant="outlined"
+          value={Number(number)}
+          onChange={(event) => setNumber(event.target.value)}
           color="secondary"
-          // type={showPassword ? "text" : "password"}
-          // value={password}
-          // onChange={(event) => setPassword(event.target.value)}
-          inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres." }}
           focused
           required
         />
@@ -43,28 +95,25 @@ const EditAddressPage = () => {
         <TextField
           id="outlined-basic"
           label="Complemento"
+          name="complement"
           type={"text"}
-          placeholder={"Apto. / Bloco"}
           variant="outlined"
+          placeholder={"Apto. / Bloco"}
+          value={!complement ? "" : complement}
+          onChange={(event) => setComplement(event.target.value)}
           color="secondary"
-          // type={showPassword ? "text" : "password"}
-          // value={password}
-          // onChange={(event) => setPassword(event.target.value)}
-          inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres." }}
           focused
         />
 
         <TextField
           id="outlined-basic"
-          label="Bairro"
+          label="Complemento"
+          name="neighbourhood"
           type={"text"}
-          // placeholder={"Mínimo 6 caracteres"}
           variant="outlined"
+          value={neighbourhood}
+          onChange={(event) => setNeighbourhood(event.target.value)}
           color="secondary"
-          // type={showPassword ? "text" : "password"}
-          // value={password}
-          // onChange={(event) => setPassword(event.target.value)}
-          inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres." }}
           focused
           required
         />
@@ -72,36 +121,30 @@ const EditAddressPage = () => {
         <TextField
           id="outlined-basic"
           label="Cidade"
+          name="city"
           type={"text"}
-          // placeholder={"Mínimo 6 caracteres"}
           variant="outlined"
+          value={city}
+          onChange={(event) => setCity(event.target.value)}
           color="secondary"
-          // type={showPassword ? "text" : "password"}
-          // value={password}
-          // onChange={(event) => setPassword(event.target.value)}
-          inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres." }}
           focused
           required
         />
-
-
 
         <TextField
           id="outlined-basic"
           label="Estado"
+          name="state"
           type={"text"}
-          // placeholder={"Mínimo 6 caracteres"}
           variant="outlined"
+          value={state}
+          onChange={(event) => setState(event.target.value)}
           color="secondary"
-          // type={showPassword ? "text" : "password"}
-          // value={password}
-          // onChange={(event) => setPassword(event.target.value)}
-          inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres." }}
           focused
           required
         />
 
-        <LoginButton type="submit">Salvar</LoginButton>
+        <FormButton type="submit">Salvar</FormButton>
 
       </AddressForm>
     </PageContainer>

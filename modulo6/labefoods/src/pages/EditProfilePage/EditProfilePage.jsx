@@ -48,7 +48,8 @@ const EditProfilePage = () => {
     await axios
       .put(`${BASE_URL}/profile`, body, header)
       .then(res => {
-        console.log(res.data.user)
+        localStorage.setItem("token", res.data.token)
+        goToProfilePage(navigate)
       })
       .catch(error => console.log(error.message))
   }
@@ -56,7 +57,6 @@ const EditProfilePage = () => {
   const onSubmitForm = (event) => {
     event.preventDefault()
     updateProfile()
-    goToProfilePage(navigate)
   }
 
   useEffect(() => {

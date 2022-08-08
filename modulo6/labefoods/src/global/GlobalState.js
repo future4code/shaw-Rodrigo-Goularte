@@ -13,7 +13,7 @@ const GlobalState = (props) => {
   const [cartProducts, setCartProducts] = useState([])
   const [order, setOrder] = useState({})
 
-  console.log(cartProducts)
+  // console.log(cartProducts)
 
   const header = { headers: { auth: window.localStorage.getItem("token") } }
 
