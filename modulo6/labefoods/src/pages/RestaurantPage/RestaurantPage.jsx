@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { useParams } from 'react-router-dom'
 import Header from "../../components/Header/Header"
 import ProductCard from "../../components/ProductCard/ProductCard"
@@ -7,7 +7,6 @@ import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { PageContainer } from "../../styled/GlobalStyle"
 import { CategoryName, Line, ProductsContainer } from "./styled"
-
 
 const RestaurantPage = () => {
 
@@ -30,7 +29,7 @@ const RestaurantPage = () => {
 
   return (
     <PageContainer>
-      <Header title="Restaurante" showArrow={true}/>
+      <Header title="Restaurante" showArrow={true} />
 
       <RestaurantDetailCard
         id={restaurantDetails.id}
@@ -42,8 +41,8 @@ const RestaurantPage = () => {
         address={restaurantDetails.address}
       />
 
-      {
-        categories.map((category) => {
+      {categories
+        .map((category) => {
           return (
             <ProductsContainer key={category}>
               <CategoryName>{category}</CategoryName>
@@ -60,7 +59,6 @@ const RestaurantPage = () => {
                           key={product.id}
                           id={product.id}
                           product={product}
-                          // restaurantDetails={restaurantDetails}
                           photoUrl={product.photoUrl}
                           name={product.name}
                           description={product.description}

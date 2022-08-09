@@ -3,6 +3,7 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from "../../components/Header/Header"
+import { headers } from "../../constants/headers"
 import { BASE_URL } from "../../constants/url"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { goToProfilePage } from "../../routes/coordinator"
@@ -21,13 +22,10 @@ const EditAddressPage = () => {
   const [state, setState] = useState("")
   const [complement, setComplement] = useState("")
 
-  const header = { headers: { auth: window.localStorage.getItem("token") } }
-
   const getFullAddress = async () => {
     await axios
-      .get(`${BASE_URL}/profile/address`, header)
-      .then(res => {
-        console.log(res.data.address)
+      .get(`${BASE_URL}/profile/address`, headers)
+      .then((res) => {
         setStreet(res.data.address.street)
         setNumber(res.data.address.number)
         setNeighbourhood(res.data.address.neighbourhood)
@@ -35,26 +33,24 @@ const EditAddressPage = () => {
         setState(res.data.address.state)
         setComplement(res.data.address.complement)
       })
-      .catch(error => console.log(error.response))
+      .catch((error) => {console.log(error.response)})
   }
 
   const addAddress = async () => {
     const body = {street, number, neighbourhood, city, state, complement}
     await axios
-      .put(`${BASE_URL}/address`, body, header)
-      .then(res => {
-        // console.log(res.data)
+      .put(`${BASE_URL}/address`, body, headers)
+      .then((res) => {
         localStorage.setItem("token", res.data.token)
         goToProfilePage(navigate)
       })
-      .catch(error => console.log(error.message))
+      .catch((error) => {console.log(error.message)})
   }
 
   const onSubmitForm = (event) => {
     event.preventDefault()
     addAddress()
   }
-
 
   useEffect(() => {
     getFullAddress()
@@ -65,7 +61,6 @@ const EditAddressPage = () => {
       <Header title="Endereço" showArrow={true}/>
 
       <AddressForm onSubmit={onSubmitForm}>
-
         <TextField
           id="outlined-basic"
           label="Logradouro"
@@ -145,7 +140,6 @@ const EditAddressPage = () => {
         />
 
         <FormButton type="submit">Salvar</FormButton>
-
       </AddressForm>
     </PageContainer>
   )

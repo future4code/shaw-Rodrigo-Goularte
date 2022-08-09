@@ -8,6 +8,7 @@ import { ProfileForm } from "./styled"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { goToProfilePage } from "../../routes/coordinator"
 import { useNavigate } from "react-router-dom"
+import { headers } from "../../constants/headers"
 
 const EditProfilePage = () => {
 
@@ -18,17 +19,26 @@ const EditProfilePage = () => {
   const [email, setEmail] = useState("")
   const [cpf, setCpf] = useState("")
 
-  const header = { headers: { auth: window.localStorage.getItem("token") } }
-
   const getProfile = async () => {
     await axios
-      .get(`${BASE_URL}/profile`, header)
+      .get(`${BASE_URL}/profile`, headers)
       .then(res => {
         setName(res.data.user.name)
         setEmail(res.data.user.email)
         setCpf(res.data.user.cpf)
       })
       .catch(error => console.log(error.response))
+  }
+
+  const updateProfile = async () => {
+    const body = {name, email, cpf}
+    await axios
+      .put(`${BASE_URL}/profile`, body, headers)
+      .then(res => {
+        localStorage.setItem("token", res.data.token)
+        goToProfilePage(navigate)
+      })
+      .catch(error => console.log(error.message))
   }
 
   // REGEX de cpf
@@ -41,17 +51,6 @@ const EditProfilePage = () => {
         .replace(/(\d{3})(\d{1,2})/, "$1-$2")
         .replace(/(-\d{2})\d+?$/, "$1")
     }
-  }
-  
-  const updateProfile = async () => {
-    const body = {name, email, cpf}
-    await axios
-      .put(`${BASE_URL}/profile`, body, header)
-      .then(res => {
-        localStorage.setItem("token", res.data.token)
-        goToProfilePage(navigate)
-      })
-      .catch(error => console.log(error.message))
   }
 
   const onSubmitForm = (event) => {
@@ -68,7 +67,6 @@ const EditProfilePage = () => {
       <Header title="Editar" showArrow={true} />
 
       <ProfileForm onSubmit={onSubmitForm}>
-
         <TextField
           id="outlined-basic"
           label="Nome"
@@ -109,7 +107,6 @@ const EditProfilePage = () => {
         />
 
         <FormButton type="submit">Salvar</FormButton>
-
       </ProfileForm>
     </PageContainer>
   )

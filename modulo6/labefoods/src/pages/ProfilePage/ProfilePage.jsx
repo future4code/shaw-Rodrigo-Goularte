@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { AddressContainer, AddressInfo, AddressTitle, EditIcon, Info, Line, OrderHistoryContainer, OrdersList, PersonalInfo, ProfilePageContainer } from "./styled"
 import edit from "../../assets/edit.svg"
@@ -10,21 +9,23 @@ import { goToEditAddressPage, goToEditProfilePage } from "../../routes/coordinat
 import Menu from "../../components/Menu/Menu"
 import Header from "../../components/Header/Header"
 import { BASE_URL } from "../../constants/url"
+import { headers } from "../../constants/headers"
+import GlobalContext from "../../global/GlobalContext"
 
 const ProfilePage = () => {
 
   useProtectedPage()
   const navigate = useNavigate()
 
-  const [ordersHistory, setOrdersHistory] = useState([])
-
   const { states, requests } = useContext(GlobalContext)
   const { profile } = states
   const { getProfile } = requests
 
+  const [ordersHistory, setOrdersHistory] = useState([])
+
   const getOrdersHistory = async () => {
     await axios
-      .get(`${BASE_URL}/orders/history`, { headers: { auth: window.localStorage.getItem("token") } })
+      .get(`${BASE_URL}/orders/history`, headers)
       .then((res) => {
         setOrdersHistory(res.data.orders)
       })
@@ -35,7 +36,6 @@ const ProfilePage = () => {
     getProfile()
     getOrdersHistory()
   }, [])
-
 
   return (
     <ProfilePageContainer>
@@ -70,8 +70,8 @@ const ProfilePage = () => {
                   restaurantName={order.restaurantName}
                   createdAt={order.createdAt}
                   totalPrice={order.totalPrice}
-                />            
-            )
+                />
+              )
             }) :
             <p>Você não realizou nenhum pedido</p>
           }

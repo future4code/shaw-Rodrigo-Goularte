@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField'
 import { ClickHereButton, LoginForm, Logo, PasswordContainer, PasswordInput, TopText } from "./styled"
 import { FormButton, PageContainer } from "../../styled/GlobalStyle"
 import { BASE_URL } from "../../constants/url"
-import logo from "../../images/logo-future-eats.png"
+import logo from "../../assets/logo-future-eats.png"
 import { Visibility, VisibilityOff } from "@mui/icons-material"
 import { IconButton } from "@mui/material"
 
@@ -77,7 +77,7 @@ const LoginPage = () => {
       <LoginForm onSubmit={onSubmitForm}>
 
         <TextField
-          id="outlined-basic"
+          id="email"
           label="E-mail"
           name="email"
           type={"email"}
@@ -94,7 +94,7 @@ const LoginPage = () => {
 
         <PasswordContainer>
           <PasswordInput
-            id="outlined-basic"
+            id="password"
             label="Senha"
             name="password"
             type={showPassword ? "text" : "password"}

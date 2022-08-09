@@ -3,10 +3,10 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { goToSignUpAddressPage } from "../../routes/coordinator"
 import TextField from '@mui/material/TextField'
-import { Logo, PasswordContainer, PasswordInput, SignUpButton, SignUpForm, TopText } from "./styled"
+import { Logo, PasswordContainer, PasswordInput, SignUpForm, TopText } from "./styled"
 import { FormButton, PageContainer } from "../../styled/GlobalStyle"
 import { BASE_URL } from "../../constants/url"
-import logo from "../../images/logo-future-eats.png"
+import logo from "../../assets/logo-future-eats.png"
 import { useForm } from "../../hooks/useForm"
 import { IconButton } from "@mui/material"
 import { Visibility, VisibilityOff } from "@mui/icons-material"
@@ -25,9 +25,7 @@ const SignUpPage = () => {
   const [checkEmailError, setCheckEmailError] = useState(false)
   const [checkCpfError, setCheckCpfError] = useState(false)
 
-
-
-  const [form, onChange, clean] = useForm({
+  const [form, onChange] = useForm({
     name: "",
     email: "",
     cpf: "",
@@ -77,8 +75,6 @@ const SignUpPage = () => {
       setCheckPasswordError(false)
       signUp()
     }
-
-    // console.log("BODY:", form)
   }
 
   return (
@@ -92,7 +88,7 @@ const SignUpPage = () => {
       <SignUpForm onSubmit={onSubmitForm}>
 
         <TextField
-          id="outlined-basic"
+          id="name"
           label="Nome"
           name="name"
           type={"text"}
@@ -106,7 +102,7 @@ const SignUpPage = () => {
         />
 
         <TextField
-          id="outlined-basic"
+          id="email"
           label="E-mail"
           name="email"
           type={"email"}
@@ -122,7 +118,7 @@ const SignUpPage = () => {
         />
 
         <TextField
-          id="outlined-basic"
+          id="cpf"
           label="CPF"
           name="cpf"
           type={"text"}
@@ -139,7 +135,7 @@ const SignUpPage = () => {
 
         <PasswordContainer>
           <PasswordInput
-            id="outlined-basic"
+            id="password"
             label="Senha"
             name="password"
             type={showPassword ? "text" : "password"}
@@ -164,7 +160,7 @@ const SignUpPage = () => {
 
         <PasswordContainer>
           <PasswordInput
-            id="outlined-basic"
+            id="confirmPassword"
             label="Confirmar"
             name="confirmPassword"
             type={showConfirmPassword ? "text" : "password"}

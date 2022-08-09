@@ -7,11 +7,12 @@ import Menu from "../../components/Menu/Menu"
 import OrderInProgressCard from "../../components/OrderInProgressCard/OrderInProgressCard"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
 import { BASE_URL } from "../../constants/url"
-import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { goToRestaurantPage, goToSearchPage } from "../../routes/coordinator"
 import { PageContainer } from "../../styled/GlobalStyle"
 import { RestaurantListContainer, SearchInput } from "./styled"
+import { headers } from "../../constants/headers"
+import GlobalContext from "../../global/GlobalContext"
 
 const HomePage = () => {
 
@@ -22,17 +23,12 @@ const HomePage = () => {
   const [activeOrder, setActiveOrder] = useState({})
 
   const {states, requests} = useContext(GlobalContext)
-  const {restaurants} = states
+  const { restaurants } = states
   const {getRestaurants} = requests
 
-  // console.log(restaurants)
-  // console.log(activeOrder)
-
   const getActiveOrder = async () => {
-    const header = { headers: { auth: window.localStorage.getItem("token") } }
-
     await axios
-      .get(`${BASE_URL}/active-order`, header)
+      .get(`${BASE_URL}/active-order`, headers)
       .then((res) => {
         setActiveOrder(res.data.order)
       })

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { useContext, useEffect, useState } from "react"
 import Header from "../../components/Header/Header"
 import Menu from "../../components/Menu/Menu"
@@ -9,23 +9,21 @@ import { AddressInfo, AddressTitle, ButtonContainer, CartPageContainer, ConfirmB
 import { BASE_URL } from "../../constants/url"
 import { useNavigate } from "react-router-dom"
 import { goToHomePage } from "../../routes/coordinator"
+import { useProtectedPage } from "../../hooks/useProtectedPage"
+import { headers } from "../../constants/headers"
 
 const CartPage = () => {
 
+  useProtectedPage()
   const navigate = useNavigate()
 
   const [payment, setPayment] = useState("")
   const [fullPrice, setFullPrice] = useState(0)
-  const [order, setOrder] = useState({})
 
-
-  const { states, setters } = useContext(GlobalContext)
+  const { states, setters, requests } = useContext(GlobalContext)
   const { profile, cartProducts, restaurantInfo, orderInfo } = states
   const {setCartProducts} = setters
-
-  // console.log(cartProducts)
-  // console.log(payment)
-  // console.log(order)
+  const {getProfile} = requests
 
   const totalPrice = () => {
     let price = 0
@@ -37,11 +35,9 @@ const CartPage = () => {
   }
 
   const placeOrder = async () => {
-    const header = { headers: { auth: window.localStorage.getItem("token") } }
     const body = {products: orderInfo, paymentMethod: payment}
-
     await axios
-      .post(`${BASE_URL}/restaurants/${restaurantInfo.id}/order`, body, header)
+      .post(`${BASE_URL}/restaurants/${restaurantInfo.id}/order`, body, headers)
       .then((res) => {
         console.log(res.data)
         setCartProducts([])
@@ -53,6 +49,7 @@ const CartPage = () => {
   }
 
   useEffect(() => {
+    getProfile()
     totalPrice()
   }, [cartProducts])
 

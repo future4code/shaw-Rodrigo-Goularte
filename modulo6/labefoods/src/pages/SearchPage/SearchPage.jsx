@@ -13,8 +13,9 @@ const SearchPage = () => {
   useProtectedPage()
   const navigate = useNavigate()
 
-  const { states } = useContext(GlobalContext)
+  const { states, requests } = useContext(GlobalContext)
   const { restaurants } = states
+  const {getRestaurants} = requests
 
   const [search, setSearch] = useState("")
   const [isSearchEmpty, setIsSearchEmpty] = useState(true)
@@ -44,6 +45,7 @@ const SearchPage = () => {
   }
 
   useEffect(() => {
+    getRestaurants()
     checkSearch()
   }, [search])
 
@@ -63,7 +65,6 @@ const SearchPage = () => {
         {(searchResult.length === 0 && isSearchEmpty === false) && <p>{"Não encontramos :("}</p>}
         {isSearchEmpty && <p>{"Busque por nome de restaurante"}</p>}
       </RestaurantListContainer>
-
     </PageContainer>
   )
 }
