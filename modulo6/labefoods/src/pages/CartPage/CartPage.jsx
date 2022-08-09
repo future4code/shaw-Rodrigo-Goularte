@@ -15,8 +15,9 @@ const CartPage = () => {
   const [order, setOrder] = useState({})
 
 
-  const { states } = useContext(GlobalContext)
+  const { states, setters } = useContext(GlobalContext)
   const { profile, cartProducts, restaurantInfo, orderInfo } = states
+  const {setCartProducts} = setters
 
   // console.log(cartProducts)
   // console.log(orderInfo)
@@ -37,7 +38,10 @@ const CartPage = () => {
 
     await axios
       .post(`${BASE_URL}/restaurants/${restaurantInfo.id}/order`, body, header)
-      .then((res) => console.log(res.data) )
+      .then((res) => {
+        console.log(res.data)
+        setCartProducts([])
+      })
       .catch(error => console.log(error.response.data))
   }
 

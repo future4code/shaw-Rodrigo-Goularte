@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from "react"
+import axios from "axios"
 import { useNavigate } from "react-router"
 import Filter from "../../components/Filter/Filter"
 import Header from "../../components/Header/Header"
 import Menu from "../../components/Menu/Menu"
+import OrderInProgressCard from "../../components/OrderInProgressCard/OrderInProgressCard"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
+import { BASE_URL } from "../../constants/url"
 import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { goToRestaurantPage, goToSearchPage } from "../../routes/coordinator"
@@ -16,13 +19,25 @@ const HomePage = () => {
   const navigate = useNavigate()
 
   const [category, setCategory] = useState("Todos")
+  const [activeOrder, setActiveOrder] = useState({})
 
   const {states, requests} = useContext(GlobalContext)
   const {restaurants} = states
   const {getRestaurants} = requests
 
   // console.log(restaurants)
-  // console.log(category)
+  console.log(activeOrder)
+
+  const getActiveOrder = async () => {
+    const header = { headers: { auth: window.localStorage.getItem("token") } }
+
+    await axios
+      .get(`${BASE_URL}/active-order`, header)
+      .then((res) => {
+        setActiveOrder(res.data.order)
+      })
+      .catch((error) => console.log(error.response))
+  }
 
   const handleChangeCategory = (event, newValue) => {
     setCategory(newValue)
@@ -30,6 +45,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getRestaurants()
+    getActiveOrder()
   }, [])
 
   return(
@@ -69,6 +85,13 @@ const HomePage = () => {
         }
       </RestaurantListContainer>
       
+      {activeOrder &&
+        <OrderInProgressCard
+        totalPrice={activeOrder.totalPrice}
+        restaurantName={activeOrder.restaurantName}
+      />
+      }
+
       <Menu page={"home"}/>
     </PageContainer>
   )
