@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { ArrowBackIosNew } from "@mui/icons-material"
+import LogoutIcon from "@mui/icons-material/Logout"
 
 export const HeaderContainer = styled.div `
   display: flex;
@@ -24,7 +25,11 @@ export const GoBackArrow = styled(ArrowBackIosNew) `
   }
 `
 
+export const Logout = styled(LogoutIcon) `
+  && {
+    position: absolute;
+    right: 10px;
 
-export const Title = styled.div `
-  
+    width: 20px;
+  }
 `

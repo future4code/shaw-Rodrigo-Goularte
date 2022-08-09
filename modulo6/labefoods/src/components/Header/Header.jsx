@@ -1,11 +1,17 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import { goBack } from "../../routes/coordinator"
-import { GoBackArrow, HeaderContainer, Title } from "./styled"
+import { goBack, goToLoginPage } from "../../routes/coordinator"
+import { GoBackArrow, HeaderContainer, Logout, Title } from "./styled"
 
-const Header = ({title, showArrow}) => {
+const Header = ({title, showArrow, showLogout}) => {
 
   const navigate = useNavigate()
+
+  const logout = () => {
+    window.localStorage.removeItem("token")
+    goToLoginPage(navigate)
+  }
+
   return(
     <HeaderContainer>
       {showArrow &&
@@ -13,7 +19,8 @@ const Header = ({title, showArrow}) => {
           onClick={() => goBack(navigate)}
         />
       }
-      <Title>{title}</Title>
+      <p>{title}</p>
+      {showLogout && <Logout onClick={logout}/>}
     </HeaderContainer>
   )
 }

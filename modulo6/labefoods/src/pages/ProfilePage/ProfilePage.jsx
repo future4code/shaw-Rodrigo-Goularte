@@ -39,7 +39,7 @@ const ProfilePage = () => {
 
   return (
     <ProfilePageContainer>
-      <Header title="Meu perfil" showArrow={false} />
+      <Header title="Meu perfil" showArrow={false} showLogout={true} />
 
       <PersonalInfo>
         <Info>

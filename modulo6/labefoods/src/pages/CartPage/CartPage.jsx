@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material"
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { useContext, useEffect, useState } from "react"
 import Header from "../../components/Header/Header"
 import Menu from "../../components/Menu/Menu"
@@ -7,8 +7,12 @@ import ProductCard from "../../components/ProductCard/ProductCard"
 import GlobalContext from "../../global/GlobalContext"
 import { AddressInfo, AddressTitle, ButtonContainer, CartPageContainer, ConfirmButton, DescriptionContainer, Line, OrderContainer, PaymentContainer, PriceContainer, RestaurantInfoContainer, RestaurantName, Total, TotalContainer } from "./styled"
 import { BASE_URL } from "../../constants/url"
+import { useNavigate } from "react-router-dom"
+import { goToHomePage } from "../../routes/coordinator"
 
 const CartPage = () => {
+
+  const navigate = useNavigate()
 
   const [payment, setPayment] = useState("")
   const [fullPrice, setFullPrice] = useState(0)
@@ -20,8 +24,8 @@ const CartPage = () => {
   const {setCartProducts} = setters
 
   // console.log(cartProducts)
-  // console.log(orderInfo)
-  console.log(order)
+  // console.log(payment)
+  // console.log(order)
 
   const totalPrice = () => {
     let price = 0
@@ -34,23 +38,18 @@ const CartPage = () => {
 
   const placeOrder = async () => {
     const header = { headers: { auth: window.localStorage.getItem("token") } }
-    const body = order
+    const body = {products: orderInfo, paymentMethod: payment}
 
     await axios
       .post(`${BASE_URL}/restaurants/${restaurantInfo.id}/order`, body, header)
       .then((res) => {
         console.log(res.data)
         setCartProducts([])
+        goToHomePage(navigate)
       })
-      .catch(error => console.log(error.response.data))
-  }
-
-  const submitOrder = () => {
-    setOrder({
-      products: orderInfo,
-      paymentMethod: payment
-    })
-    placeOrder()
+      .catch(error => {
+        alert(error.response.data.message)
+      })
   }
 
   useEffect(() => {
@@ -132,7 +131,7 @@ const CartPage = () => {
 
       <ButtonContainer>
         <ConfirmButton
-          onClick={submitOrder}
+          onClick={placeOrder}
           disabled={cartProducts.length > 0 ? false : true}
         >
           Confirmar

@@ -26,7 +26,7 @@ const HomePage = () => {
   const {getRestaurants} = requests
 
   // console.log(restaurants)
-  console.log(activeOrder)
+  // console.log(activeOrder)
 
   const getActiveOrder = async () => {
     const header = { headers: { auth: window.localStorage.getItem("token") } }
