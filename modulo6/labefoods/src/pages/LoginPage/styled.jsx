@@ -33,3 +33,11 @@ export const PasswordInput = styled(TextField) `
     width: 100%;
     }
 `
+
+export const ClickHereButton = styled.button `
+  margin-left: 4px;
+  background-color: white;
+  border: none;
+  
+  font-size: 16px;
+`

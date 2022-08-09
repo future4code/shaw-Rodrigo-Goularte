@@ -10,6 +10,7 @@ import logo from "../../images/logo-future-eats.png"
 import { useForm } from "../../hooks/useForm"
 import { IconButton } from "@mui/material"
 import { Visibility, VisibilityOff } from "@mui/icons-material"
+import Header from "../../components/Header/Header"
 
 const SignUpPage = () => {
 
@@ -82,6 +83,7 @@ const SignUpPage = () => {
 
   return (
     <PageContainer>
+      <Header title="" showArrow={true}/>
 
       <Logo src={logo} alt="logo-future-eats" />
 

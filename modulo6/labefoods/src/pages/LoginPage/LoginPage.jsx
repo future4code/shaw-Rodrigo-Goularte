@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { goToHomePage, goToSignUpAddressPage, goToSignUpPage } from "../../routes/coordinator"
 import TextField from '@mui/material/TextField'
-import { LoginForm, Logo, PasswordContainer, PasswordInput, TopText } from "./styled"
+import { ClickHereButton, LoginForm, Logo, PasswordContainer, PasswordInput, TopText } from "./styled"
 import { FormButton, PageContainer } from "../../styled/GlobalStyle"
 import { BASE_URL } from "../../constants/url"
 import logo from "../../images/logo-future-eats.png"
@@ -123,7 +123,7 @@ const LoginPage = () => {
         <FormButton type="submit">Entrar</FormButton>
       </LoginForm>
 
-      <span>Não possui cadastro? clique <button onClick={() => goToSignUpPage(navigate)}>aqui</button></span>
+      <span>Não possui cadastro?<ClickHereButton onClick={() => goToSignUpPage(navigate)}>Clique aqui.</ClickHereButton></span>
     </PageContainer>
   )
 }

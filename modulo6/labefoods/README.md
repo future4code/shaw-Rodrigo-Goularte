@@ -51,7 +51,7 @@ O objetivo é...
 - [x] Fluxo de Login/Cadastro
 - [x] Busca e Seleção de Restaurantes
 - [x] Cardápio do Restaurante
-- [ ] Carrinho e Finalizar Compra
+- [x] Carrinho e Finalizar Compra
 - [x] Perfil, Editar Perfil e Histórico de Pedidos
 
 ---

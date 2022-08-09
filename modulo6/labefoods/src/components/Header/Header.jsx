@@ -1,7 +1,7 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { goBack, goToLoginPage } from "../../routes/coordinator"
-import { GoBackArrow, HeaderContainer, Logout, Title } from "./styled"
+import { GoBackArrow, HeaderContainer, Logout } from "./styled"
 
 const Header = ({title, showArrow, showLogout}) => {
 

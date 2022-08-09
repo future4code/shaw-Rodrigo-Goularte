@@ -7,6 +7,7 @@ import { SignUpForm, TopText } from "./styled"
 import { FormButton, PageContainer } from "../../styled/GlobalStyle"
 import { BASE_URL } from "../../constants/url"
 import { useForm } from "../../hooks/useForm"
+import Header from "../../components/Header/Header"
 
 const SignUpAddressPage = () => {
 
@@ -44,6 +45,7 @@ const SignUpAddressPage = () => {
 
   return (
     <PageContainer>
+      <Header title="" showArrow={true}/>
 
       <TopText>Meu endereço</TopText>
 
