@@ -13,6 +13,7 @@ import { PageContainer } from "../../styled/GlobalStyle"
 import { RestaurantListContainer, SearchInput } from "./styled"
 import { headers } from "../../constants/headers"
 import GlobalContext from "../../global/GlobalContext"
+import CircularProgress from '@mui/material/CircularProgress'
 
 const HomePage = () => {
 
@@ -59,7 +60,7 @@ const HomePage = () => {
       />
 
       <RestaurantListContainer>
-        { 
+        {restaurants.length > 0 ?
           restaurants
             .filter((restaurant) => {
               if(category !== "Todos") {
@@ -77,7 +78,7 @@ const HomePage = () => {
                   onClick={() => goToRestaurantPage(navigate, restaurant.id)}
                 />
               )
-            })
+            }) : <CircularProgress/>
         }
       </RestaurantListContainer>
       

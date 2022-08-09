@@ -17,6 +17,7 @@ export const SearchInput = styled.input `
 export const RestaurantListContainer = styled.div `
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   width: 100%;
   

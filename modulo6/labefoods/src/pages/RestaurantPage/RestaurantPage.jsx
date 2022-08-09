@@ -7,6 +7,7 @@ import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
 import { PageContainer } from "../../styled/GlobalStyle"
 import { CategoryName, Line, ProductsContainer } from "./styled"
+import CircularProgress from '@mui/material/CircularProgress'
 
 const RestaurantPage = () => {
 
@@ -31,7 +32,8 @@ const RestaurantPage = () => {
     <PageContainer>
       <Header title="Restaurante" showArrow={true} />
 
-      <RestaurantDetailCard
+      {restaurantDetails ?
+        <RestaurantDetailCard
         id={restaurantDetails.id}
         logoUrl={restaurantDetails.logoUrl}
         name={restaurantDetails.name}
@@ -39,9 +41,11 @@ const RestaurantPage = () => {
         deliveryTime={restaurantDetails.deliveryTime}
         shipping={restaurantDetails.shipping}
         address={restaurantDetails.address}
-      />
+        /> :
+        <CircularProgress/>
+      }
 
-      {categories
+      {categories.length > 0 ? categories
         .map((category) => {
           return (
             <ProductsContainer key={category}>
@@ -69,7 +73,7 @@ const RestaurantPage = () => {
               </ProductsContainer>
             </ProductsContainer>
           )
-        })
+        }) : <CircularProgress/>
       }
     </PageContainer>
   )

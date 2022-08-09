@@ -20,6 +20,7 @@ export const goToSearchPage = (navigate) => {
 
 export const goToRestaurantPage = (navigate, id) => {
   navigate(`/restaurante/${id}`)
+  window.scrollTo(0, 0)
 }
 
 export const goToProfilePage = (navigate) => {
