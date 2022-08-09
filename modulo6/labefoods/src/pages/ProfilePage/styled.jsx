@@ -76,3 +76,12 @@ export const OrderHistoryContainer = styled.div`
 
   width: 100%;
 `
+
+export const OrdersList = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+  gap: 8px;
+
+  width: 100%;
+`

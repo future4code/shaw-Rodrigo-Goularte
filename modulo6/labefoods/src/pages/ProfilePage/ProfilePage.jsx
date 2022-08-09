@@ -1,33 +1,45 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import GlobalContext from "../../global/GlobalContext"
 import { useProtectedPage } from "../../hooks/useProtectedPage"
-import { AddressContainer, AddressInfo, AddressTitle, EditIcon, Info, Line, OrderHistoryContainer, PersonalInfo, ProfilePageContainer } from "./styled"
+import { AddressContainer, AddressInfo, AddressTitle, EditIcon, Info, Line, OrderHistoryContainer, OrdersList, PersonalInfo, ProfilePageContainer } from "./styled"
 import edit from "../../assets/edit.svg"
 import OrderCard from "../../components/OrderCard/OrderCard"
 import { goToEditAddressPage, goToEditProfilePage } from "../../routes/coordinator"
 import Menu from "../../components/Menu/Menu"
 import Header from "../../components/Header/Header"
+import { BASE_URL } from "../../constants/url"
 
 const ProfilePage = () => {
 
   useProtectedPage()
   const navigate = useNavigate()
 
-  const {states, requests} = useContext(GlobalContext)
-  const {profile} = states
-  const {getProfile} = requests
+  const [ordersHistory, setOrdersHistory] = useState([])
 
-  // console.log(profile)
+  const { states, requests } = useContext(GlobalContext)
+  const { profile } = states
+  const { getProfile } = requests
+
+  const getOrdersHistory = async () => {
+    await axios
+      .get(`${BASE_URL}/orders/history`, { headers: { auth: window.localStorage.getItem("token") } })
+      .then((res) => {
+        setOrdersHistory(res.data.orders)
+      })
+      .catch((error) => console.log(error.response))
+  }
 
   useEffect(() => {
     getProfile()
+    getOrdersHistory()
   }, [])
 
 
-  return(
+  return (
     <ProfilePageContainer>
-      <Header title="Meu perfil" showArrow={false}/>
+      <Header title="Meu perfil" showArrow={false} />
 
       <PersonalInfo>
         <Info>
@@ -48,13 +60,25 @@ const ProfilePage = () => {
 
       <OrderHistoryContainer>
         <p>Histórico de pedidos</p>
-        <Line/>
-        <div>
-          <OrderCard/>
-        </div>
+        <Line />
+        <OrdersList>
+          {ordersHistory.length > 0 ?
+            ordersHistory.map((order) => {
+              return (
+                <OrderCard
+                  key={order.createdAt}
+                  restaurantName={order.restaurantName}
+                  createdAt={order.createdAt}
+                  totalPrice={order.totalPrice}
+                />            
+            )
+            }) :
+            <p>Você não realizou nenhum pedido</p>
+          }
+        </OrdersList>
       </OrderHistoryContainer>
 
-      <Menu page={"profile"}/>
+      <Menu page={"profile"} />
     </ProfilePageContainer>
   )
 }

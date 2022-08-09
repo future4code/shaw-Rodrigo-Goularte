@@ -1,13 +1,18 @@
 import React from "react"
 import { OrderCardContainer, OrderDate, RestaurantName } from "./styled"
 
-const OrderCard = () => {
+const OrderCard = ({restaurantName, createdAt, totalPrice}) => {
+
+  const converDate = (timeStamp) => {
+    let date = new Date(timeStamp)
+    return date.toLocaleDateString()
+  }
 
   return(
-    <OrderCardContainer>
-      <RestaurantName>Bullguer Vila Madalena</RestaurantName>
-      <OrderDate>23 outubro 2019</OrderDate>
-      <h4>SUBTOTAL R$67,00</h4>
+    <OrderCardContainer key={createdAt}>
+      <RestaurantName>{restaurantName}</RestaurantName>
+      <OrderDate>{converDate(createdAt)}</OrderDate>
+      <h4>{`${totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</h4>
     </OrderCardContainer>
   )
 }
