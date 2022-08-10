@@ -10,7 +10,7 @@ class UserDB extends BaseDatabase {
     try {
       await BaseDatabase.connection(userTableName)
         .insert({
-          id: user.getId(),
+          // id: user.getId(),
           first_name: user.getFirstName(),
           last_name: user.getLastName(),
           participation: user.getParticipation(),

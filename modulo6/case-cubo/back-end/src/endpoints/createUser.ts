@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import UserDB from "../data/UserDB";
-import { User } from "../model/User";
-import { GenerateId } from "../services/GenerateId";
+import { Request, Response } from "express"
+import UserDB from "../data/UserDB"
+import { User } from "../model/User"
+// import { GenerateId } from "../services/GenerateId"
 
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
@@ -18,12 +18,13 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
     }
 
     //cria um id
-    const generateId = new GenerateId()
-    const id = generateId.generate()
+    // const generateId = new GenerateId()
+    // const id = generateId.generate()
 
     //cria o user
     const userDB = new UserDB()
-    const newUser = new User(id, firstName, lastName, participation)
+    const newUser = new User(firstName, lastName, participation)
+    // const newUser = new User(id, firstName, lastName, participation)
     await userDB.insertUser(newUser)
 
     res.status(201).send({message: "Usuário criado com sucesso!"})
