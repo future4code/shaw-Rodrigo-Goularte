@@ -10,7 +10,7 @@ class UserDB extends BaseDatabase {
     try {
       await BaseDatabase.connection(userTableName)
         .insert({
-          // id: user.getId(),
+          id: user.getId(),
           first_name: user.getFirstName(),
           last_name: user.getLastName(),
           participation: user.getParticipation(),
@@ -26,6 +26,28 @@ class UserDB extends BaseDatabase {
         .select("*")
       
       return result
+    } catch (error: any) {
+      throw new Error(error.message || error.sqlMessage)
+    }
+  }
+
+  public selectParticipationSum = async (): Promise<any> => {
+    try {
+      const result = await BaseDatabase.connection(userTableName)
+        .sum("participation")
+      
+      return result[0]
+    } catch (error: any) {
+      throw new Error(error.message || error.sqlMessage)
+    }
+  }
+
+  public deleteUserById = async (id: string): Promise<void> => {
+    console.log(id)
+    try {
+      await BaseDatabase.connection(userTableName)
+        .where({"id": id})
+        .del()
     } catch (error: any) {
       throw new Error(error.message || error.sqlMessage)
     }

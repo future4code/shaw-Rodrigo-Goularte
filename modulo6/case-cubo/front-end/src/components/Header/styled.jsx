@@ -2,10 +2,13 @@ import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
   height: 15vh;
+
+  gap: 8px;
 
   background-color: #00B8E2;
 `
@@ -44,4 +47,9 @@ export const Button = styled.button`
     border: 2px solid #00718a;
     background-color: #00718a;
   }
+`
+export const ErrorMessage = styled.h4`
+  width: 70vw;
+
+  padding-left: 40px;
 `
