@@ -1,0 +1,20 @@
+POST http://localhost:3003/users
+
+Content-Type: application/json
+
+{
+  "firstName": "",
+  "lastName": "",
+  "participation": ""
+}
+
+###
+
+DELETE http://localhost:3003/users/7d37d535-3c29-4c0b-9334-ebbd5d3b79a8
+Content-Type: application/json
+
+###
+
+GET http://localhost:3003/sum
+
+Content-Type: application/json
